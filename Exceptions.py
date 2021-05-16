@@ -12,3 +12,15 @@ class PlacaInvalida(Error):
 
 class DadosVeiculosIncompletosException(Error):
     "Dados do veiculo incompleto"
+    pass
+
+class DadosAcessoIncompletosException(Error):
+    "Dados de Acesso incompleto"
+    pass
+
+class DadosPessoaisIncompletosException(Error):
+    "Dados pessoais das pessoas fisicas incompleto"
+    pass
+
+class EstacionamentoFechadoException(Error):
+    "Estacionamento Fechado"

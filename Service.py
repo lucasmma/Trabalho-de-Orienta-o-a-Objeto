@@ -21,7 +21,7 @@ class Service:
 
     def getVeiculo(self, placa):
         for veiculo in self.veiculos:
-            if(veiculo.placa == placa):
+            if(veiculo.numero_da_placa == placa):
                 return veiculo
 
         return None
