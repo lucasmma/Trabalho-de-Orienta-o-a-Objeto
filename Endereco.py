@@ -1,7 +1,7 @@
 
 
 class Endereco:
-    def __init__(self, id_endereco, uf, cidade, bairro, endereco, complemento):
+    def __init__(self, id_endereco : int, uf : str, cidade : str, bairro : str, endereco : str, complemento : str):
         self.id_endereco = id_endereco
         self.uf = uf
         self.cidade = cidade

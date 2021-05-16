@@ -1,28 +1,60 @@
 
 class Service:
+    veiculos = []
+    acessos = []
+    pessoasFisicas = []
     def __init__(self):
         return 
 
-    def cadastrarVeiculo(Veiculo):
+    def cadastrarVeiculo(self, Veiculo):
+        self.veiculos.append(Veiculo)
         return
 
-    def cadastrarPessoaFisica(PessoaFisica):
+    def cadastrarPessoaFisica(self, PessoaFisica):
+        self.pessoasFisicas.append(PessoaFisica)
         return
 
-    def cadastrarAcesso(Acesso):
+    def cadastrarAcesso(self,Acesso):
+        self.acessos.append(Acesso)
         return
 
-    def cadastrarEndereco(Endereco):
-        return
 
-    def cadastrarEndereco(Endereco):
-        return
+    def getVeiculo(self, placa):
+        for veiculo in self.veiculos:
+            if(veiculo.placa == placa):
+                return veiculo
 
-    def getVeiculo() :
-        return
+        return None
 
-    def getPessoaFisica() :
-            return
+    def getPessoaFisica(self, cpf):
+        for pessoafisica in self.veiculos:
+            if(pessoafisica.cpf == cpf):
+                return pessoafisica
+
+        return None
    
-    def getAcesso():
-            return
+    def getAcesso(self, id_acesso):
+        for acesso in self.acessos:
+            if(acesso.id_acesso == id_acesso):
+                return acesso
+
+        return None
+
+    def listarVeiculos(self):
+        for veiculo in self.veiculos:
+            veiculo.printClass()
+
+        return 
+
+    def listarPessoasFisicas(self):
+        for pessoasfisica in self.pessoasFisicas:
+            pessoasfisica.printClass()
+
+        return 
+
+
+    def listarAcessos(self):
+        for pessoasfisica in self.pessoasFisicas:
+            pessoasfisica.printClass()
+
+        return 
