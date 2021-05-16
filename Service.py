@@ -26,9 +26,9 @@ class Service:
 
         return None
 
-    def getPessoaFisica(self, cpf):
+    def getPessoaFisica(self, cnh):
         for pessoafisica in self.veiculos:
-            if(pessoafisica.cpf == cpf):
+            if(pessoafisica.cnh == cnh):
                 return pessoafisica
 
         return None

@@ -1,8 +1,10 @@
 
+from Veiculo import Veiculo
+
 class Acesso:
-    def __init__(self, id_acesso : int, id_veiculo : int, hora_entrada : int, hora_saida : int):
+    def __init__(self, id_acesso : str, veiculo : Veiculo, hora_entrada : int, hora_saida : int):
         self.id_acesso = id_acesso
-        self.id_veiculo = id_veiculo
+        self.veiculo = veiculo
         self.hora_entrada = hora_entrada
         self.hora_saida = hora_saida
 
@@ -10,8 +12,8 @@ class Acesso:
         return
 
     def printClass(self):
-        print(self.id_acesso)    
-        print(self.id_veiculo)    
-        print(self.hora_entrada)    
-        print(self.hora_saida)    
+        print("ID Acesso " + self.id_acesso)    
+        print("Hora Entrada " + self.hora_entrada)    
+        print("Hora Saida" + self.hora_saida)  
+        self.veiculo.printClass()    
     
