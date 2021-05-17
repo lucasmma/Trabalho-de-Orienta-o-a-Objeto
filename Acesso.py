@@ -9,7 +9,8 @@ class Acesso:
         self.hora_saida = hora_saida
 
     def getPrecoFinal(self):
-        return
+        #Terminar a função de preço final
+        return self.hora_saida - self.hora_entrada
 
     def printClass(self):
         print("ID Acesso " + self.id_acesso)    
@@ -17,3 +18,8 @@ class Acesso:
         print("Hora Saida" + self.hora_saida)  
         self.veiculo.printClass()    
     
+    def setHorarioSaida(self, hora_saida):
+        self.hora_saida = hora_saida
+    
+    def validarHorarios(self):
+        return self.hora_saida > self.hora_entrada

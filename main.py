@@ -5,13 +5,15 @@ from PessoaFisica import PessoaFisica
 from Veiculo import Veiculo
 from Acesso import Acesso
 import os
-from Exceptions import InvalidMenuNumberException
+from Exceptions import DadosAcessoIncompletosException, InvalidMenuNumberException
 from Exceptions import PlacaInvalidaException
 from Exceptions import DadosVeiculosIncompletosException
 from Exceptions import DadosPessoaisIncompletosException
 from Exceptions import EstacionamentoFechadoException
 from Exceptions import VeiculoDuplicadoException
 from Exceptions import PessoaFisicaDuplicadaException
+from Exceptions import VeiculoNaoEncontradoException
+from Exceptions import PeriodoInvalidoException
 import datetime
 
 exit = False
@@ -67,7 +69,6 @@ def cadastrarMensalista():
     global service
     try:
         cnh = str(input("Digite o numero da sua CNH: "))
-        # CHECAR SE JA TA CADASTRADO COM A CNH
 
         pfCadastrada = service.getPessoaFisica(int(cnh))
 
@@ -132,8 +133,45 @@ def registrarEntrada():
         registrarEntrada()
 
 def registrarSaida():
-    print("Em desenvolvimento")   
-    pass
+    global service
+    
+    print("Cadastro da placa do carro deve ser no seguinte formato ###-####")
+    placaDoCarro = getPlacaDoCarro() 
+
+    try:
+        veiculo = service.getVeiculo(placaDoCarro)
+
+        if veiculo == None:
+            raise VeiculoNaoEncontradoException
+        else:
+            hora_saida = getTimeStampValue()
+            acesso = service.getAcesso(veiculo.numero_da_placa)
+            
+            if acesso == None:
+                raise DadosAcessoIncompletosException
+
+            acesso.setHorarioSaida(hora_saida)
+            if not acesso.validarHorarios():
+                raise PeriodoInvalidoException
+
+
+            #Terminar a função de preço final
+            print("\nO preço total a ser pago será: R$" + str(acesso.getPrecoFinal()) + "\n\n")
+                
+            
+
+
+    except VeiculoNaoEncontradoException:
+        print("Placa inválida (O veículo não se encontra estacionado)\n")
+        registrarSaida()
+    
+    except DadosAcessoIncompletosException:
+        print("Acesso não encontrado")
+        registrarSaida()
+    
+    except PeriodoInvalidoException:
+        print("A saida deve ocorrer depois da entrada")
+        registrarSaida()
 
 def cadastrarVeiculo(placaDoCarro):
     global service

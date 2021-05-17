@@ -34,9 +34,9 @@ class Service:
 
         return None
    
-    def getAcesso(self, id_acesso):
+    def getAcesso(self, numerodaplaca):
         for acesso in self.acessos:
-            if(acesso.id_acesso == id_acesso):
+            if(numerodaplaca in acesso.id_acesso):
                 return acesso
 
         return None

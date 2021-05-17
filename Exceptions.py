@@ -34,3 +34,15 @@ class VeiculoDuplicadoException(Error):
 class PessoaFisicaDuplicadaException(Error):
     "Veiculo Duplicado"
     pass
+
+class DadosAcessoIncompletosException(Error):
+    "Dados acessos incompletos/errados"
+    pass
+
+class VeiculoNaoEncontradoException(Error):
+    "Veiculo não encontrado no estacionamento"
+    pass
+
+class PeriodoInvalidoException(Error):
+    "Periodo de tempo invalido, horario saida maior ou igual horario entrada"
+    pass
