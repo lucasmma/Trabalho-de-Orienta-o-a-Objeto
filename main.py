@@ -4,6 +4,7 @@ from Endereco import Endereco
 from PessoaFisica import PessoaFisica
 from Veiculo import Veiculo
 from Acesso import Acesso
+from Utils import horario_abre, horario_fecha, dia_inteiro
 import os
 from Exceptions import DadosAcessoIncompletosException, InvalidMenuNumberException
 from Exceptions import PlacaInvalidaException
@@ -14,15 +15,21 @@ from Exceptions import VeiculoDuplicadoException
 from Exceptions import PessoaFisicaDuplicadaException
 from Exceptions import VeiculoNaoEncontradoException
 from Exceptions import PeriodoInvalidoException
+from Exceptions import PessoaFisicaInexistenteException
 import datetime
+
 
 exit = False
 service = Service()
-horario_abre = 21600
-horario_fecha = 72000
-dia_inteiro = 86400
+
 
 def main():
+    
+    # veiculo1 = Veiculo(None,"gol","2014","123-1234")
+    # service.cadastrarVeiculo(veiculo1)
+    # service.cadastrarAcesso(Acesso("123-1234",veiculo1,getTimeStampFromData("20/12/20 19:55"),getTimeStampFromData("21/12/20 07:15")))
+    
+    # service.listarAcessos()
     while not exit:
         showMenu()
 
@@ -33,32 +40,51 @@ def clearTerminal():
 
 def showMenu():
     # clearTerminal()
-    print("Olá Bem vindo (de volta) ao sistema do Estacione Fácil\n\n")
+    print("\nOlá Bem vindo (de volta) ao sistema do Estacione Fácil\n\n")
     print("1 - Cadastro de Mensalista")
-    print("2 - Cadastro de Entrada")
-    print("3 - Cadastro de Saida")
-    print("4 - Sair do Sistema\n\n")
-
-    #COMANDO PRA LISTAR AS ENTIDADES
+    print("2 - Cadastro de Veiculo de Mensalista")
+    print("3 - Cadastro de Entrada")
+    print("4 - Cadastro de Saida")
+    print("5 - Listar Mensalistas")
+    print("6 - Listar Veículos")
+    print("7 - Listar Acessos")
+    print("8 - Sair do Sistema\n\n")
 
     validarEntradaNoMenu()
 
 def validarEntradaNoMenu():
+    global service
+
     itemChoosen = int(input("Escolha uma opção acima: "))
     print("\n")
 
     try:
         if itemChoosen == 1:
             cadastrarMensalista()
+            print("\nMensalista registrada com Sucesso!")
         elif itemChoosen == 2:
+            cadastrarVeiculoDoMensalista()
+            print("\nVeiculo do Mensalista registrada com Sucesso!")
+        elif itemChoosen == 3:
             registrarEntrada()
-        elif  itemChoosen == 3:
+            print("\nEntrada registrada com Sucesso!")
+        elif  itemChoosen == 4:
             registrarSaida()
-        elif itemChoosen == 4:
+            print("\nSaida registrada com Sucesso! Volte sempre")
+        elif itemChoosen == 5:
+            service.listarPessoasFisicas()
+        elif itemChoosen == 6:
+            service.listarVeiculos()
+        elif itemChoosen == 7:
+            service.listarAcessos()
+        elif itemChoosen == 8:
             global exit
             exit = True
         else:
             raise InvalidMenuNumberException
+        
+        if not exit:
+            input("Pressione ENTER para voltar para o menu")
     except InvalidMenuNumberException:
         print("Selecione um valor válido no menu")
         validarEntradaNoMenu()
@@ -94,6 +120,35 @@ def cadastrarMensalista():
         print("CNH inválida (Pessoa já cadastrada)\n")
         return cadastrarMensalista()
 
+def cadastrarVeiculoDoMensalista():
+    global service
+    try:
+        cnh = str(input("Digite o numero da sua CNH: "))
+
+        pfCadastrada = service.getPessoaFisica(int(cnh))
+
+        if pfCadastrada == None:
+            raise PessoaFisicaInexistenteException
+        
+        print("Cadastro da placa do carro deve ser no seguinte formato ###-####")
+        placaDoCarro = getPlacaDoCarro()
+
+        veiculo = service.getVeiculo(placaDoCarro)
+
+        if veiculo != None:
+            veiculo.cnh = cnh
+            service.updateVeiculo(veiculo)
+        else:
+            veiculo = cadastrarVeiculo(placaDoCarro, cnh)
+            service.cadastrarVeiculo(veiculo)
+
+
+    except PessoaFisicaInexistenteException:
+        print("CNH inválida (Nenhum mensalista encontrado)")
+        return cadastrarVeiculoDoMensalista()
+    
+
+
 def cadastrarEndereco():
     try:
         uf = str(input("Digite o seu UF: "))
@@ -117,10 +172,14 @@ def registrarEntrada():
     placaDoCarro = getPlacaDoCarro()
 
     try:
-        veiculo = service.getVeiculo(placaDoCarro)
+        acesso = service.getAcesso(placaDoCarro)
 
-        if veiculo == None:
-            veiculo = cadastrarVeiculo(placaDoCarro)
+        if acesso == None:
+            veiculo = service.getVeiculo(placaDoCarro)
+
+            if veiculo == None:
+                veiculo = cadastrarVeiculo(placaDoCarro)
+            
             hora_entrada = getTimeStampValue()
                 
             acesso = Acesso(veiculo.numero_da_placa + str(hora_entrada), veiculo, hora_entrada, None)
@@ -154,12 +213,12 @@ def registrarSaida():
             if not acesso.validarHorarios():
                 raise PeriodoInvalidoException
 
-
-            #Terminar a função de preço final
-            print("\nO preço total a ser pago será: R$" + str(acesso.getPrecoFinal()) + "\n\n")
-                
-            
-
+            if veiculo.cnh != None:
+                print("O veiculo se encontra cadastrado no nome de um mensalista, ou seja, não deve ser cobrado taxa na saida e sim uma taxa no final do mês de R$500,00.")
+            else:
+                #Terminar a função de preço final
+                formatedprice = "{:.2f}".format(acesso.getPrecoFinal())
+                print("\nO preço total a ser pago será: R$" + str(formatedprice) + "\n\n")
 
     except VeiculoNaoEncontradoException:
         print("Placa inválida (O veículo não se encontra estacionado)\n")
@@ -173,7 +232,7 @@ def registrarSaida():
         print("A saida deve ocorrer depois da entrada")
         registrarSaida()
 
-def cadastrarVeiculo(placaDoCarro):
+def cadastrarVeiculo(placaDoCarro, CNH = None):
     global service
     try:
         marca = str(input("Digite a marca do carro: "))
@@ -181,7 +240,7 @@ def cadastrarVeiculo(placaDoCarro):
         if len(marca) == 0 or len(modelo) == 0:
             raise DadosVeiculosIncompletosException
         else:
-            veiculo = Veiculo(None, marca, modelo, placaDoCarro)
+            veiculo = Veiculo(CNH, marca, modelo, placaDoCarro)
             service.cadastrarVeiculo(veiculo)
             return veiculo
     except DadosVeiculosIncompletosException:
@@ -193,8 +252,7 @@ def getTimeStampValue():
     try:
         print("O horario deve seguir o formado (Dia)/(Mes)/(Ano) (Hora):(Minuto)")
         data = str(input("Digite a hora atual: "))
-        timeformat = r"%d/%m/%y %H:%M"
-        timestampEntrada =  datetime.datetime.strptime(data, timeformat).replace(tzinfo=datetime.timezone.utc).astimezone(tz=None).timestamp()
+        timestampEntrada =  getTimeStampFromData(data)
         
         if (timestampEntrada % dia_inteiro) < horario_abre or (timestampEntrada % dia_inteiro) > horario_fecha:
             raise EstacionamentoFechadoException
@@ -207,6 +265,10 @@ def getTimeStampValue():
     except EstacionamentoFechadoException:
         print("O estacionamento abre 6 horas e fecha 20 horas")
         return getTimeStampValue()
+
+def getTimeStampFromData(data):
+    timeformat = r"%d/%m/%y %H:%M"
+    return datetime.datetime.strptime(data, timeformat).replace(tzinfo=datetime.timezone.utc).astimezone(tz=None).timestamp()
 
 
 def getPlacaDoCarro():

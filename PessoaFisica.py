@@ -9,8 +9,8 @@ class PessoaFisica:
         self.endereco = endereco
 
     def printClass(self):
-        print("CNH " + self.cnh)
-        print("Nome Completo " + self.nome_completo)
-        print("Telefone Celular " + self.telefone_celular)
-        print("Telefone Residencial " + self.telefone_residencial)
+        print("\tCNH " + str(self.cnh))
+        print("\tNome Completo " + self.nome_completo)
+        print("\tTelefone Celular " + self.telefone_celular)
+        print("\tTelefone Residencial " + self.telefone_residencial)
         self.endereco.printClass()

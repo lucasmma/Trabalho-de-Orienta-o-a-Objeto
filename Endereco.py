@@ -9,8 +9,8 @@ class Endereco:
         self.complemento = complemento
 
     def printClass(self):
-        print("UF " + self.uf)
-        print("Cidade " + self.cidade)
-        print("Bairro " + self.bairro)
-        print("Endereco " + self.endereco)
-        print("Complemento " + self.complemento)
+        print("\tUF " + self.uf)
+        print("\tCidade " + self.cidade)
+        print("\tBairro " + self.bairro)
+        print("\tEndereco " + self.endereco)
+        print("\tComplemento " + self.complemento)

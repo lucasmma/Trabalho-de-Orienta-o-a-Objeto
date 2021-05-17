@@ -19,6 +19,11 @@ class Service:
         self.acessos.append(acesso)
         return
 
+    def updateVeiculo(self, veiculo):
+        for i in range(0, len(self.veiculos)):
+            if(self.veiculos[i].numero_da_placa == veiculo.numero_da_placa):
+                self.veiculos[i] = veiculo
+        return
 
     def getVeiculo(self, placa):
         for veiculo in self.veiculos:
@@ -36,26 +41,29 @@ class Service:
    
     def getAcesso(self, numerodaplaca):
         for acesso in self.acessos:
-            if(numerodaplaca in acesso.id_acesso):
+            if((numerodaplaca in acesso.id_acesso) and (acesso.hora_saida == None)):
                 return acesso
 
         return None
 
     def listarVeiculos(self):
-        for veiculo in self.veiculos:
-            veiculo.printClass()
+        for index in range(0, len(self.veiculos)):
+            print("Veículo " + str(index))
+            self.veiculos[index].printClass()
 
         return 
 
     def listarPessoasFisicas(self):
-        for pessoasfisica in self.pessoasFisicas:
-            pessoasfisica.printClass()
+        for index in range(0, len(self.pessoasFisicas)):
+            print("Pessoa física " + str(index))
+            self.pessoasFisicas[index].printClass()
 
         return 
 
 
     def listarAcessos(self):
-        for pessoasfisica in self.pessoasFisicas:
-            pessoasfisica.printClass()
+        for index in range(0, len(self.acessos)):
+            print("Acesso " + str(index))
+            self.acessos[index].printClass()
 
         return 
