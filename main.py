@@ -5,11 +5,13 @@ from PessoaFisica import PessoaFisica
 from Veiculo import Veiculo
 from Acesso import Acesso
 import os
-from Exceptions import InvalidMenuNumber
-from Exceptions import PlacaInvalida
+from Exceptions import InvalidMenuNumberException
+from Exceptions import PlacaInvalidaException
 from Exceptions import DadosVeiculosIncompletosException
 from Exceptions import DadosPessoaisIncompletosException
 from Exceptions import EstacionamentoFechadoException
+from Exceptions import VeiculoDuplicadoException
+from Exceptions import PessoaFisicaDuplicadaException
 import datetime
 
 exit = False
@@ -47,15 +49,15 @@ def validarEntradaNoMenu():
         if itemChoosen == 1:
             cadastrarMensalista()
         elif itemChoosen == 2:
-            cadastrarEntrada()
+            registrarEntrada()
         elif  itemChoosen == 3:
-            pass
+            registrarSaida()
         elif itemChoosen == 4:
             global exit
             exit = True
         else:
-            raise InvalidMenuNumber
-    except InvalidMenuNumber:
+            raise InvalidMenuNumberException
+    except InvalidMenuNumberException:
         print("Selecione um valor válido no menu")
         validarEntradaNoMenu()
 
@@ -66,6 +68,12 @@ def cadastrarMensalista():
     try:
         cnh = str(input("Digite o numero da sua CNH: "))
         # CHECAR SE JA TA CADASTRADO COM A CNH
+
+        pfCadastrada = service.getPessoaFisica(int(cnh))
+
+        if pfCadastrada != None:
+            raise PessoaFisicaDuplicadaException
+        
         nome_completo = str(input("Digite seu nome Completo: "))
         telefone_celular = str(input("Digite seu telefone Celular: "))
         telefone_residencial = str(input("Digite seu telefone residencial: "))
@@ -79,6 +87,10 @@ def cadastrarMensalista():
 
     except DadosPessoaisIncompletosException:
         print("Cadastro os dados corretamente")
+        return cadastrarMensalista()
+    
+    except PessoaFisicaDuplicadaException:
+        print("CNH inválida (Pessoa já cadastrada)\n")
         return cadastrarMensalista()
 
 def cadastrarEndereco():
@@ -96,24 +108,32 @@ def cadastrarEndereco():
         print("Cadastro os dados do Endereco corretamente")
         return cadastrarEndereco()
 
-def cadastrarEntrada():
+def registrarEntrada():
     global service
 
     
     print("Cadastro da placa do carro deve ser no seguinte formato ###-####")
     placaDoCarro = getPlacaDoCarro()
-    #CHECAR SE CARRO JA ENTROU
-    
-    veiculo = service.getVeiculo(placaDoCarro)
 
-    if veiculo == None:
-        veiculo = cadastrarVeiculo(placaDoCarro)
-    
-    hora_entrada = getTimeStampValue()
-    print(hora_entrada)
-        
-    acesso = Acesso(veiculo.numero_da_placa + str(hora_entrada), veiculo, hora_entrada, None)
-    service.cadastrarAcesso(acesso)
+    try:
+        veiculo = service.getVeiculo(placaDoCarro)
+
+        if veiculo == None:
+            veiculo = cadastrarVeiculo(placaDoCarro)
+            hora_entrada = getTimeStampValue()
+                
+            acesso = Acesso(veiculo.numero_da_placa + str(hora_entrada), veiculo, hora_entrada, None)
+            service.cadastrarAcesso(acesso)
+        else:
+            raise VeiculoDuplicadoException
+
+    except VeiculoDuplicadoException:
+        print("Placa do veículo inválida (Veiculo já se encontra estacionado)\n")
+        registrarEntrada()
+
+def registrarSaida():
+    print("Em desenvolvimento")   
+    pass
 
 def cadastrarVeiculo(placaDoCarro):
     global service
@@ -156,10 +176,10 @@ def getPlacaDoCarro():
     try:
         placadocarro = input("Digite a placa do carro: ")
         if len(placadocarro) != 8 or placadocarro[3] != "-":
-            raise PlacaInvalida
+            raise PlacaInvalidaException
         else:
             return placadocarro
-    except PlacaInvalida:
+    except PlacaInvalidaException:
         print("Digite a placa corretamente, com a seguinte mask ###-####")
         return getPlacaDoCarro()
 

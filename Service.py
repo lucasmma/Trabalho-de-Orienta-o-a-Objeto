@@ -1,21 +1,22 @@
 
+
 class Service:
-    veiculos = []
-    acessos = []
-    pessoasFisicas = []
     def __init__(self):
+        self.veiculos = []
+        self.acessos = []
+        self.pessoasFisicas = []
         return 
 
-    def cadastrarVeiculo(self, Veiculo):
-        self.veiculos.append(Veiculo)
+    def cadastrarVeiculo(self, veiculo):
+        self.veiculos.append(veiculo)
         return
 
-    def cadastrarPessoaFisica(self, PessoaFisica):
-        self.pessoasFisicas.append(PessoaFisica)
+    def cadastrarPessoaFisica(self, pessoafisica):
+        self.pessoasFisicas.append(pessoafisica)
         return
 
-    def cadastrarAcesso(self,Acesso):
-        self.acessos.append(Acesso)
+    def cadastrarAcesso(self, acesso):
+        self.acessos.append(acesso)
         return
 
 
@@ -27,7 +28,7 @@ class Service:
         return None
 
     def getPessoaFisica(self, cnh):
-        for pessoafisica in self.veiculos:
+        for pessoafisica in self.pessoasFisicas:
             if(pessoafisica.cnh == cnh):
                 return pessoafisica
 

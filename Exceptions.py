@@ -2,11 +2,11 @@ class Error(Exception):
     """Base class for other exceptions"""
     pass
 
-class InvalidMenuNumber(Error):
+class InvalidMenuNumberException(Error):
     "Selecionado quando o valor é invalido no menu"
     pass
 
-class PlacaInvalida(Error):
+class PlacaInvalidaException(Error):
     "Mask de placa invalida"
     pass
 
@@ -24,3 +24,13 @@ class DadosPessoaisIncompletosException(Error):
 
 class EstacionamentoFechadoException(Error):
     "Estacionamento Fechado"
+    pass
+
+
+class VeiculoDuplicadoException(Error):
+    "Veiculo Duplicado"
+    pass
+
+class PessoaFisicaDuplicadaException(Error):
+    "Veiculo Duplicado"
+    pass
