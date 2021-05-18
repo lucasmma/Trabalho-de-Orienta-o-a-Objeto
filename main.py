@@ -140,7 +140,6 @@ def cadastrarVeiculoDoMensalista():
             service.updateVeiculo(veiculo)
         else:
             veiculo = cadastrarVeiculo(placaDoCarro, cnh)
-            service.cadastrarVeiculo(veiculo)
 
 
     except PessoaFisicaInexistenteException:
