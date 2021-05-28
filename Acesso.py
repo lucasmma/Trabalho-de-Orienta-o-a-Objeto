@@ -51,7 +51,7 @@ class Acesso:
         preco_final = 0
         if diferenca_de_horario < 32400:
             preco_final += floor(diferenca_de_horario/60) * 0.5
-            preco_final -= floor(diferenca_de_horario/900)
+            preco_final -= floor(diferenca_de_horario/900) * 0.5
             preco_final -= floor(diferenca_de_horario/3600)
         else:
             diferenca_de_horario -= 32400

@@ -24,12 +24,6 @@ service = Service()
 
 
 def main():
-    
-    # veiculo1 = Veiculo(None,"gol","2014","123-1234")
-    # service.cadastrarVeiculo(veiculo1)
-    # service.cadastrarAcesso(Acesso("123-1234",veiculo1,getTimeStampFromData("20/12/20 19:55"),getTimeStampFromData("21/12/20 07:15")))
-    
-    # service.listarAcessos()
     while not exit:
         showMenu()
 
@@ -140,7 +134,6 @@ def cadastrarVeiculoDoMensalista():
             service.updateVeiculo(veiculo)
         else:
             veiculo = cadastrarVeiculo(placaDoCarro, cnh)
-            service.cadastrarVeiculo(veiculo)
 
 
     except PessoaFisicaInexistenteException:

@@ -1,0 +1,101 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;240&lt;/x&gt;&lt;y&gt;120&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;76&lt;/x&gt;&lt;y&gt;290&lt;/y&gt;&lt;w&gt;50&lt;/w&gt;&lt;h&gt;90&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;&amp;lt;-
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;70;30;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;84&lt;/x&gt;&lt;y&gt;70&lt;/y&gt;&lt;w&gt;280&lt;/w&gt;&lt;h&gt;70&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;&amp;lt;-
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;50;10;10;260;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;230&lt;/x&gt;&lt;y&gt;110&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;Space for diagram notesc</help_text><element><id>UMLClass</id><coordinates><x>42</x><y>270</y><w>220</w><h>180</h></coordinates><panel_attributes>Service
+--
++ cadastrarVeiculo(): Veiculo
++ cadastrarPessoaFisica(): Pessoa Fisica
++ cadastrarEndereco(): Endereco
++ cadastrarAcesso(): Acesso
++ getVeiculo(): Veiculo
++ getPessoaFisica(): Pessoa Fisica
++ getAcessos(): Acesso
++ listarVeiculos(): Void
++ listarPessoaFisica(): Void
++ listarAcessos(): Void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>302</x><y>510</y><w>210</w><h>130</h></coordinates><panel_attributes>Pessoa Fisica
+--
++ cnh: Int
++ nome_completo: String
++ telefone_celular: String
++ telefone_residencial: String
+--
++ printClass(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>32</x><y>510</y><w>190</w><h>110</h></coordinates><panel_attributes>Veiculo
+--
++ cnh: Int
++ marca: String
++ modelo: String
++ numero_da_placa: String
+--
++ printClass(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>322</x><y>690</y><w>160</w><h>160</h></coordinates><panel_attributes>Endereco
+--
++ endereco: Int
++ uf: String
++ bairro: String
++ cidade: String
++ endereco: String
++ complemento: String
+--
++ printClass(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>532</x><y>507</y><w>200</w><h>180</h></coordinates><panel_attributes>Acesso
+--
++ id_acesso: Int
++ numero_da_placa: String
++ hora_entrada: Timestamp
++ hora_saida: Timestamp
+--
++ getPrecoFinal(): Float
++ getPrecoMesmoDia(): Float
++ setHorarioSaida(): Int
++ validarHorarios(): Bool
++ printClass(): String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>722</x><y>270</y><w>310</w><h>180</h></coordinates><panel_attributes>Exceptions
+--
++ PlacaInvalidaException(): Error String
++ DadosVeiculosIncompletosException(): Error String
++ DadosAcessoIncompletosException(): Error String
++ DadosPessoaisIncompletosException(): Error String
++ EstacionamentoFechadoException(): Error String
++ VeiculoDuplicadoException(): Error String
++ PessoaFisicaDuplicadaException(): Error String
++ DadosAcessoIncompletosException(): Error String
++ VeiculoNaoEncontradoException(): Error String
++ PeriodoInvalidoException(): Error String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>380</x><y>10</y><w>210</w><h>180</h></coordinates><panel_attributes>Main
+--
++ clearTerminal()
++ showMenu(): String
++ validarEntradaNoMenu(): Int
++ cadastrarMensalista(): Void
++ cadastrarEndereco(): Void
++ registrarEntrada(): Void
++ registrarSaida(): Void
++ cadastrarVeiculo(): Void
++ getTimeStampValue(): String
++ getPlacaDoCarro(): String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>142</x><y>180</y><w>360</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;90;10;50;340;50;340;10</additional_attributes></element><element><id>Relation</id><coordinates><x>118</x><y>450</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>630</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>258</x><y>410</y><w>170</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;20;150;20;150;100</additional_attributes></element><element><id>Relation</id><coordinates><x>258</x><y>370</y><w>400</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;20;380;20;380;140</additional_attributes></element><element><id>Text</id><coordinates><x>350</x><y>650</y><w>100</w><h>70</h></coordinates><panel_attributes>Extends
+
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>460</x><y>190</y><w>100</w><h>70</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>130</x><y>230</y><w>100</w><h>70</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>280</x><y>360</y><w>100</w><h>70</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>280</x><y>400</y><w>100</w><h>70</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>130</x><y>450</y><w>100</w><h>70</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>130</x><y>480</y><w>100</w><h>70</h></coordinates><panel_attributes>0..*
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>410</x><y>480</y><w>100</w><h>70</h></coordinates><panel_attributes>0..*
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>590</x><y>480</y><w>100</w><h>70</h></coordinates><panel_attributes>0..*
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>460</x><y>190</y><w>100</w><h>70</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>180</y><w>420</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>400;90;400;50;10;50;10;10</additional_attributes></element><element><id>Text</id><coordinates><x>500</x><y>190</y><w>100</w><h>70</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>900</x><y>230</y><w>100</w><h>70</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>770</x><y>520</y><w>280</w><h>190</h></coordinates><panel_attributes>Observações:
+
+1- Foi subentendido que todo cadastro de pessoa fisica seria equivalente a um mensalista
+
+2- id_acesso é formado por uma string no seguinte formato  {placa do carro}{timestamp entrada} os dois concatenados
+
+3- cnh é oque correlaciona o proprietario aos seus veiculos
+
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>218</x><y>550</y><w>100</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>80;20;10;20</additional_attributes></element><element><id>Text</id><coordinates><x>230</x><y>540</y><w>100</w><h>70</h></coordinates><panel_attributes>0..*
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>270</x><y>540</y><w>100</w><h>70</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element></diagram>
