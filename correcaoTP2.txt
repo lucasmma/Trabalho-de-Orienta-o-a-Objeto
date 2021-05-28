@@ -9,7 +9,7 @@ OBS.: há uma parte significativa do projeto que nao utiliza o paradigma de OO.
 - Os cadastros de veiculos, clientes e acessos estão funcionando adequadamente,
   com o armazenamento dos objetos em memória? (-10 pontos para cada classe
   faltante, limitados a -30 pontos)
-    Numero de cadastros faltantes: -10 potnos
+    Numero de cadastros faltantes: 
 
 - As associações entre classes, incluindo as multiplicidades dessas
   associações, estão sendo realizadas em memória? (-10 pontos para cada
